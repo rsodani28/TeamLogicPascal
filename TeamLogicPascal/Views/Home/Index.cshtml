@@ -1,0 +1,114 @@
+﻿@using System.Globalization
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>    
+    table, th, td {
+        border: 1px solid black;
+        padding: 25px;
+    }
+
+    thead {
+        background-color: skyblue;
+        color: white;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script type="text/javascript">
+    
+
+    $(document).ready(function () {
+        var currentDate = new Date();
+        $("#currentETA1,#currentETA2,#currentETA3").text(currentDate);
+        $("#newETA1,#newETA2,#newETA3").text(currentDate);
+
+        $("#Factors1,#Factors2,#Factors3").on('change', function () {
+            var noofDaysToAdd = parseInt($("#daysAdded1").html()) + parseInt(this.value);
+            $("#daysAdded1").text(noofDaysToAdd);
+            var newDate = new Date(Date.parse($("#currentETA1").html()) + noofDaysToAdd * 24 * 60 * 60 * 1000);
+            $("#newETA1").text(newDate);
+        });
+        $("#Factors4,#Factors5,#Factors6").on('change', function () {
+            var noofDaysToAdd = parseInt($("#daysAdded2").html()) + parseInt(this.value);
+            $("#daysAdded2").text(noofDaysToAdd);
+            var newDate = new Date(Date.parse($("#currentETA2").html()) + noofDaysToAdd * 24 * 60 * 60 * 1000);
+            $("#newETA2").text(newDate);
+        });
+        $("#Factors7,#Factors8,#Factors9").on('change', function () {
+            var noofDaysToAdd = parseInt($("#daysAdded3").html()) + parseInt(this.value);
+            $("#daysAdded3").text(noofDaysToAdd);
+            var newDate = new Date(Date.parse($("#currentETA3").html()) + noofDaysToAdd * 24 * 60 * 60 * 1000);
+            $("#newETA3").text(newDate);
+        });
+    });
+</script>
+
+
+
+<div class="text-center">
+    <h1 class="display-4">FLL - Cargo Connect Challenge - 2021  </h1>
+    <h1 class="display-4">Team Logic presents PASCAL</h1>
+    <p>Taking Guesswork out of a Containers Journey  - Predict an Accurate ETA of a Shipping Containers Arrival  “full Lifecycle”  [ PASCAL] </a>.</p>
+
+    <table class="text-center">
+        <thead>
+            <tr>
+                <td>Name of the Ship</td>
+                <td>Delay Factor</td>
+                <td>Delay Factor</td>
+                <td>Delay Factor</td>
+                <td>Intial ETA</td>
+                <td>No of days added due to delay factors</td>
+                <td>Current ETA</td>
+            </tr>
+        </thead>
+        <tr>
+            <td>MSC Diana</td>
+            <td>
+                @Html.DropDownList("Factors1", (IEnumerable<SelectListItem>)ViewData["factors"])
+            </td>
+            <td>
+                @Html.DropDownList("Factors2", (IEnumerable<SelectListItem>)ViewData["factors"])
+            </td>
+            <td>
+                @Html.DropDownList("Factors3", (IEnumerable<SelectListItem>)ViewData["factors"])
+            </td>
+            <td id="currentETA1">
+            </td>
+            <td id="daysAdded1">0</td>
+            <td id="newETA1">ETA</td>
+        </tr>
+        <tr>
+            <td>COSCO Shipping Taurus</td>
+            <td>
+                @Html.DropDownList("Factors4", (IEnumerable<SelectListItem>)ViewData["factors"])
+            </td>
+            <td>
+                @Html.DropDownList("Factors5", (IEnumerable<SelectListItem>)ViewData["factors"])
+            </td>
+            <td>
+                @Html.DropDownList("Factors6", (IEnumerable<SelectListItem>)ViewData["factors"])
+            </td>
+            <td id="currentETA2"></td>
+            <td id="daysAdded2">0</td>
+            <td id="newETA2"></td>
+        </tr>
+        <tr>
+            <td>Madrid Maersk</td>
+            <td>
+                @Html.DropDownList("Factors7", (IEnumerable<SelectListItem>)ViewData["factors"])
+            </td>
+            <td>
+                @Html.DropDownList("Factors8", (IEnumerable<SelectListItem>)ViewData["factors"])
+            </td>
+            <td>
+                @Html.DropDownList("Factors9", (IEnumerable<SelectListItem>)ViewData["factors"])
+            </td>
+            <td id="currentETA3"></td>
+            <td id="daysAdded3">0</td>
+            <td id="newETA3"></td>
+        </tr>
+</table>
+</div>
